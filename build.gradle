@@ -16,7 +16,7 @@
  */
 
 buildscript {
-    ext.cubaVersion = '6.10.1'
+    ext.cubaVersion = '6.10-SNAPSHOT'
     repositories {
         
         maven {
@@ -48,11 +48,15 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'com.henohgn.exlibris'
-        version = '0.1'
+        version = "0.2"
         isSnapshot = true
     }
     tomcat {
         dir = "$project.rootDir/deploy/tomcat"
+        port = 9999
+        shutdownPort = 9997
+        ajpPort = 9998
+        debugPort = 9996
     }
 }
 
@@ -61,7 +65,7 @@ dependencies {
 
 }
 
-def hsql = 'org.hsqldb:hsqldb:2.2.9'
+def postgres = 'org.postgresql:postgresql:9.4.1212'
 
 configure([globalModule, coreModule, guiModule, webModule]) {
     apply(plugin: 'java')
@@ -101,8 +105,8 @@ configure(coreModule) {
     dependencies {
         compile(globalModule)
         provided(servletApi)
-        jdbc(hsql)
-        testRuntime(hsql)
+        jdbc(postgres)
+        testRuntime(postgres)
 
     }
 
@@ -123,19 +127,19 @@ configure(coreModule) {
     }
 
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
-        dbms = 'hsql'
+        dbms = 'postgres'
         host = 'localhost'
-        dbName = 'library'
-        dbUser = 'sa'
-        dbPassword = ''
+        dbName = 'exlibris'
+        dbUser = 'cuba'
+        dbPassword = 'cuba'
     }
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
-        dbms = 'hsql'
+        dbms = 'postgres'
         host = 'localhost'
-        dbName = 'library'
-        dbUser = 'sa'
-        dbPassword = ''
+        dbName = 'exlibris'
+        dbUser = 'cuba'
+        dbPassword = 'cuba'
     }
 }
 
@@ -217,7 +221,7 @@ task restart(dependsOn: ['stop', ':app-core:deploy', ':app-web:deploy'], descrip
     doLast {
         ant.waitfor(maxwait: 6, maxwaitunit: 'second', checkevery: 2, checkeveryunit: 'second') {
             not {
-                socket(server: 'localhost', port: '8787')
+                socket(server: 'localhost', port: '9996')
             }
         }
         start.execute()
