@@ -64,6 +64,9 @@ create table LIBRARY_BOOK_PUBLICATION (
     DELETED_BY varchar(50),
     --
     YEAR_ integer not null,
+    ISBN varchar(13),
+    CIRCULATION integer,
+    PAGES integer,
     BOOK_ID uuid not null,
     PUBLISHER_ID uuid not null,
     TOWN_ID uuid,
@@ -142,3 +145,33 @@ create table LIBRARY_BOOK_AUTHOR_LINK (
     primary key (BOOK_ID, AUTHOR_ID)
 )^
 -- end LIBRARY_BOOK_AUTHOR_LINK
+-- begin LIBRARY_CATEGORIES
+create table LIBRARY_CATEGORIES (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    NAME varchar(255) not null,
+    --
+    primary key (ID)
+)^
+-- end LIBRARY_CATEGORIES
+-- begin LIBRARY_BOOK_CATEGORIES_LINK
+create table LIBRARY_BOOK_CATEGORIES_LINK (
+    CATEGORIES_ID uuid,
+    BOOK_ID uuid,
+    primary key (CATEGORIES_ID, BOOK_ID)
+)^
+-- end LIBRARY_BOOK_CATEGORIES_LINK
+-- begin LIBRARY_CATEGORIES_CATEGORIES_LINK
+create table LIBRARY_CATEGORIES_CATEGORIES_LINK (
+    CATEGORIES_1_ID uuid,
+    CATEGORIES_2_ID uuid,
+    primary key (CATEGORIES_1_ID, CATEGORIES_2_ID)
+)^
+-- end LIBRARY_CATEGORIES_CATEGORIES_LINK

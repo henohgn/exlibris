@@ -22,6 +22,10 @@ import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
 import java.util.Set;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.global.DeletePolicy;
+import java.util.List;
 
 @NamePattern("%s|name")
 @Table(name = "LIBRARY_BOOK")
@@ -32,6 +36,14 @@ public class Book extends StandardEntity {
     @Column(name = "NAME", nullable = false, length = 100)
     private String name;
 
+    @JoinTable(name = "LIBRARY_BOOK_CATEGORIES_LINK",
+        joinColumns = @JoinColumn(name = "BOOK_ID"),
+        inverseJoinColumns = @JoinColumn(name = "CATEGORIES_ID"))
+    @OnDeleteInverse(DeletePolicy.DENY)
+    @OnDelete(DeletePolicy.DENY)
+    @ManyToMany
+    protected List<Categories> categories;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "LITERATURE_TYPE_ID")
     private LiteratureType literatureType;
@@ -41,6 +53,15 @@ public class Book extends StandardEntity {
             inverseJoinColumns = @JoinColumn(name = "AUTHOR_ID"))
     @ManyToMany
     private Set<Author> authors;
+
+    public void setCategories(List<Categories> categories) {
+        this.categories = categories;
+    }
+
+    public List<Categories> getCategories() {
+        return categories;
+    }
+
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;

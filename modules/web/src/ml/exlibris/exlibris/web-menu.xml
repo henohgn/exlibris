@@ -17,16 +17,25 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="library"
           insertBefore="administration">
-        <item id="library$Book.lookup"/>
-        <item id="library$BookPublication.lookup"/>
+        <item id="library$Book.lookup"
+              icon="BOOK"/>
+        <item id="library$BookPublication.lookup"
+              icon="font-icon:ARCHIVE"/>
         <item id="accession-register"/>
     </menu>
     <menu id="referenceData"
           insertBefore="administration">
-        <item id="library$LibraryDepartment.lookup"/>
-        <item id="library$LiteratureType.lookup"/>
-        <item id="library$Town.lookup"/>
-        <item id="library$Author.lookup"/>
-        <item id="library$Publisher.lookup"/>
+        <item id="library$LibraryDepartment.lookup"
+              icon="BANK"/>
+        <item icon="icons/category.png"
+              screen="library$Categories.browse"/>
+        <item id="library$LiteratureType.lookup"
+              icon="icons/category.png"/>
+        <item id="library$Town.lookup"
+              icon="font-icon:BUILDING"/>
+        <item id="library$Author.lookup"
+              icon="USER"/>
+        <item id="library$Publisher.lookup"
+              icon="icons/user-group-ok.png"/>
     </menu>
 </menu-config>

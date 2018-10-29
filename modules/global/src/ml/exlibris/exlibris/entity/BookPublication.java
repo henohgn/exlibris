@@ -32,6 +32,15 @@ public class BookPublication extends StandardEntity {
     @Column(name = "YEAR_", nullable = false)
     private Integer year;
 
+    @Column(name = "ISBN", length = 13)
+    protected String isbn;
+
+    @Column(name = "CIRCULATION")
+    protected Integer circulation;
+
+    @Column(name = "PAGES")
+    protected Integer pages;
+
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "open", "clear"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "BOOK_ID")
@@ -46,6 +55,31 @@ public class BookPublication extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TOWN_ID")
     private Town town;
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setCirculation(Integer circulation) {
+        this.circulation = circulation;
+    }
+
+    public Integer getCirculation() {
+        return circulation;
+    }
+
+    public void setPages(Integer pages) {
+        this.pages = pages;
+    }
+
+    public Integer getPages() {
+        return pages;
+    }
+
 
     public void setYear(Integer year) {
         this.year = year;

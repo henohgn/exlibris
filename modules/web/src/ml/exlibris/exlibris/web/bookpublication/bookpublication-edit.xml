@@ -64,6 +64,9 @@
             <field optionsDatasource="townsDs"
                    property="town"
                    width="100%"/>
+            <field property="isbn"/>
+            <field property="circulation"/>
+            <field property="pages"/>
         </fieldGroup>
         <frame id="windowActions"
                screen="editWindowActions"/>

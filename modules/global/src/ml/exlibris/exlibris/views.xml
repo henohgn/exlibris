@@ -32,6 +32,8 @@
             <property name="middleName"/>
             <property name="lastName"/>
         </property>
+        <property name="categories"
+                  view="_local"/>
     </view>
     <view class="ml.exlibris.exlibris.entity.BookInstance"
           name="bookInstance.browse">
@@ -85,6 +87,14 @@
         <property name="publisher"
                   view="_minimal"/>
         <property name="town"
+                  view="_minimal"/>
+    </view>
+    <view class="ml.exlibris.exlibris.entity.Categories"
+          extends="_local"
+          name="categories-full">
+        <property name="related"
+                  view="_minimal"/>
+        <property name="books"
                   view="_minimal"/>
     </view>
 </views>

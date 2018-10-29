@@ -11,6 +11,8 @@
                     view="book.edit">
             <collectionDatasource id="authorsDs"
                                   property="authors"/>
+            <collectionDatasource id="categoriesDs"
+                                  property="categories"/>
         </datasource>
     </dsContext>
     <dialogMode height="600"
@@ -24,27 +26,52 @@
                 <field property="literatureType"/>
             </column>
         </fieldGroup>
-        <groupBox id="authorsBox"
-                  caption="msg://ml.exlibris.exlibris.entity/Book.authors">
-            <table id="authorsTable"
-                   height="200px"
-                   width="100%">
-                <actions>
-                    <action id="add"/>
-                    <action id="remove"/>
-                </actions>
-                <columns>
-                    <column id="firstName"/>
-                    <column id="middleName"/>
-                    <column id="lastName"/>
-                </columns>
-                <rows datasource="authorsDs"/>
-                <buttonsPanel>
-                    <button action="authorsTable.add"/>
-                    <button action="authorsTable.remove"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
+        <split height="316px"
+               orientation="horizontal"
+               width="100%">
+            <groupBox id="categoriesBox"
+                      caption="msg://Categories"
+                      height="100%">
+                <table id="categoriesTable"
+                       height="100%"
+                       width="100%">
+                    <actions>
+                        <action id="add"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                    </columns>
+                    <rows datasource="categoriesDs"/>
+                    <buttonsPanel>
+                        <button action="categoriesTable.add"/>
+                        <button action="categoriesTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+            <groupBox id="authorsBox"
+                      caption="msg://ml.exlibris.exlibris.entity/Book.authors"
+                      height="100%">
+                <table id="authorsTable"
+                       height="100%"
+                       width="100%">
+                    <actions>
+                        <action id="add"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="firstName"/>
+                        <column id="middleName"/>
+                        <column id="lastName"/>
+                    </columns>
+                    <rows datasource="authorsDs"/>
+                    <buttonsPanel>
+                        <button action="authorsTable.add"/>
+                        <button action="authorsTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </split>
         <frame id="windowActions"
                screen="editWindowActions"/>
     </layout>
