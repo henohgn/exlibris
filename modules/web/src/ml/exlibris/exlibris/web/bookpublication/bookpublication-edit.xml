@@ -49,24 +49,23 @@
             margin="true"
             spacing="true">
         <fieldGroup id="fieldGroup"
-                    datasource="bookPublicationDs">
-            <field property="book"
-                   optionsDatasource="booksDs"
-                   required="true"
-                   width="250px"/>
-            <field property="publisher"
-                   optionsDatasource="publishersDs"
-                   required="true"
-                   width="250px"/>
+                    datasource="bookPublicationDs"
+                    width="500px">
+            <field optionsDatasource="booksDs"
+                   property="book"
+                   width="100%"/>
+            <field optionsDatasource="publishersDs"
+                   property="publisher"
+                   width="100%"/>
             <field property="year"
-                   width="250px">
+                   width="150px">
                 <formatter class="ml.exlibris.exlibris.web.bookpublication.YearFormatter"/>
             </field>
-            <field property="town"
-                   optionsDatasource="townsDs"
-                   width="250px"/>
+            <field optionsDatasource="townsDs"
+                   property="town"
+                   width="100%"/>
         </fieldGroup>
         <frame id="windowActions"
-                screen="editWindowActions"/>
+               screen="editWindowActions"/>
     </layout>
 </window>
