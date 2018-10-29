@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2017 Haulmont Technology Ltd. All Rights Reserved.
+  ~ Haulmont Technology proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://caption"
+        class="ml.exlibris.exlibris.web.categories.CategoriesBrowse"
+        focusComponent="table"
+        lookupComponent="table"
+        messagesPack="ml.exlibris.exlibris.web.categories">
+    <dsContext>
+        <datasource id="categoriesDs"
+                    class="ml.exlibris.exlibris.entity.Categories"
+                    view="categories-full">
+            <collectionDatasource id="relatedDs"
+                                  property="related"/>
+            <collectionDatasource id="booksDs"
+                                  property="books"/>
+        </datasource>
+        <hierarchicalDatasource id="categoriesesDs"
+                                class="ml.exlibris.exlibris.entity.Categories"
+                                hierarchyProperty="related"
+                                view="categories-full">
+            <query>
+                <![CDATA[select e from library$Categories e]]>
+            </query>
+        </hierarchicalDatasource>
+    </dsContext>
+    <actions>
+        <action id="save"
+                caption="mainMsg://actions.Ok"
+                icon="icons/ok.png"
+                invoke="save"
+                shortcut="CTRL-ENTER"/>
+        <action id="cancel"
+                caption="mainMsg://actions.Cancel"
+                description="Esc"
+                icon="icons/cancel.png"
+                invoke="cancel"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <split id="split"
+               height="100%"
+               orientation="horizontal"
+               reversePosition="true"
+               width="100%">
+            <vbox id="lookupBox"
+                  expand="table"
+                  height="100%"
+                  margin="false,true,false,false"
+                  spacing="true">
+                <filter id="filter"
+                        applyTo="table"
+                        datasource="categoriesesDs">
+                    <properties include=".*"/>
+                </filter>
+                <treeTable id="table"
+                           width="100%">
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                    </columns>
+                    <rows datasource="categoriesesDs"/>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn"
+                                action="table.create"/>
+                        <button id="editBtn"
+                                action="table.edit"/>
+                        <button id="removeBtn"
+                                action="table.remove"/>
+                    </buttonsPanel>
+                </treeTable>
+            </vbox>
+            <vbox id="editBox"
+                  expand="booksGrp"
+                  height="100%"
+                  margin="false,false,false,true"
+                  spacing="true">
+                <fieldGroup id="fieldGroup"
+                            datasource="categoriesDs">
+                    <column width="250px">
+                        <field property="name"/>
+                    </column>
+                </fieldGroup>
+                <groupBox id="booksGrp"
+                          spacing="true">
+                    <table id="booksTable"
+                           height="100%"
+                           width="100%">
+                        <actions>
+                            <action id="add"/>
+                            <action id="remove"/>
+                        </actions>
+                        <columns>
+                            <column id="name"/>
+                        </columns>
+                        <rows datasource="booksDs"/>
+                        <buttonsPanel>
+                            <button action="booksTable.add"/>
+                            <button action="booksTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+                <groupBox id="relatedGrp"
+                          spacing="true">
+                    <table id="relatedTable"
+                           height="400px"
+                           width="100%">
+                        <actions>
+                            <action id="add"/>
+                            <action id="remove"/>
+                        </actions>
+                        <columns>
+                            <column id="name"/>
+                        </columns>
+                        <rows datasource="relatedDs"/>
+                        <buttonsPanel>
+                            <button action="relatedTable.add"/>
+                            <button action="relatedTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+                <hbox id="actionsPane"
+                      spacing="true"
+                      visible="false">
+                    <button id="saveBtn"
+                            action="save"/>
+                    <button id="cancelBtn"
+                            action="cancel"/>
+                </hbox>
+            </vbox>
+        </split>
+    </layout>
+</window>

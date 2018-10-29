@@ -58,6 +58,9 @@ cuba {
         ajpPort = 9998
         debugPort = 9996
     }
+    ide {
+        vcs = 'Git'
+    }
 }
 
 dependencies {
