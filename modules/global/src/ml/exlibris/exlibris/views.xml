@@ -32,8 +32,6 @@
             <property name="middleName"/>
             <property name="lastName"/>
         </property>
-        <property name="categories"
-                  view="_local"/>
         <property name="files"
                   view="_local"/>
     </view>
@@ -95,8 +93,6 @@
           extends="_local"
           name="categories-full">
         <property name="related"
-                  view="_minimal"/>
-        <property name="books"
                   view="_minimal"/>
     </view>
     <view class="ml.exlibris.exlibris.entity.Files"

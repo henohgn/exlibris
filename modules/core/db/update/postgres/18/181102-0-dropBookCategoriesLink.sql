@@ -1,0 +1,1 @@
+alter table library_book_categories_link rename to LIBRARY_BOOK_CATEGORIES_LINK__U96740 ;

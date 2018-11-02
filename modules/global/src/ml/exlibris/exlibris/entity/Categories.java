@@ -32,22 +32,6 @@ public class Categories extends StandardEntity {
     @ManyToMany
     protected List<Categories> related;
 
-    @JoinTable(name = "LIBRARY_BOOK_CATEGORIES_LINK",
-        joinColumns = @JoinColumn(name = "CATEGORIES_ID"),
-        inverseJoinColumns = @JoinColumn(name = "BOOK_ID"))
-    @OnDeleteInverse(DeletePolicy.DENY)
-    @OnDelete(DeletePolicy.DENY)
-    @ManyToMany
-    protected List<Book> books;
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
 
     public void setRelated(List<Categories> related) {
         this.related = related;

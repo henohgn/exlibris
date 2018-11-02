@@ -42,14 +42,6 @@ public class Book extends StandardEntity {
     @ManyToMany
     protected List<Files> files;
 
-    @JoinTable(name = "LIBRARY_BOOK_CATEGORIES_LINK",
-        joinColumns = @JoinColumn(name = "BOOK_ID"),
-        inverseJoinColumns = @JoinColumn(name = "CATEGORIES_ID"))
-    @OnDeleteInverse(DeletePolicy.DENY)
-    @OnDelete(DeletePolicy.DENY)
-    @ManyToMany
-    protected List<Categories> categories;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "LITERATURE_TYPE_ID")
     private LiteratureType literatureType;
@@ -68,14 +60,6 @@ public class Book extends StandardEntity {
         return files;
     }
 
-
-    public void setCategories(List<Categories> categories) {
-        this.categories = categories;
-    }
-
-    public List<Categories> getCategories() {
-        return categories;
-    }
 
 
     public void setAuthors(Set<Author> authors) {
