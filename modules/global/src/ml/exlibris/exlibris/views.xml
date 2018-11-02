@@ -34,6 +34,8 @@
         </property>
         <property name="categories"
                   view="_local"/>
+        <property name="files"
+                  view="_local"/>
     </view>
     <view class="ml.exlibris.exlibris.entity.BookInstance"
           name="bookInstance.browse">
@@ -96,5 +98,14 @@
                   view="_minimal"/>
         <property name="books"
                   view="_minimal"/>
+    </view>
+    <view class="ml.exlibris.exlibris.entity.Files"
+          extends="_local"
+          name="files-full">
+        <property name="books"
+                  view="_minimal">
+            <property name="authors"
+                      view="_minimal"/>
+        </property>
     </view>
 </views>

@@ -57,4 +57,6 @@
             template="ml/exlibris/exlibris/web/screens/ext-mainwindow.xml"/>
     <screen id="library$Categories.browse"
             template="ml/exlibris/exlibris/web/categories/categories-browse.xml"/>
+    <screen id="library$Files.browse"
+            template="ml/exlibris/exlibris/web/files/files-browse.xml"/>
 </screen-config>

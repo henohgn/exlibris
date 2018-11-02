@@ -175,3 +175,27 @@ create table LIBRARY_CATEGORIES_CATEGORIES_LINK (
     primary key (CATEGORIES_1_ID, CATEGORIES_2_ID)
 )^
 -- end LIBRARY_CATEGORIES_CATEGORIES_LINK
+-- begin LIBRARY_FILES
+create table LIBRARY_FILES (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    FILE_ID uuid,
+    DESCRIPTION varchar(255),
+    --
+    primary key (ID)
+)^
+-- end LIBRARY_FILES
+-- begin LIBRARY_BOOK_FILES_LINK
+create table LIBRARY_BOOK_FILES_LINK (
+    FILES_ID uuid,
+    BOOK_ID uuid,
+    primary key (FILES_ID, BOOK_ID)
+)^
+-- end LIBRARY_BOOK_FILES_LINK

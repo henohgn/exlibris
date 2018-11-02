@@ -37,5 +37,6 @@
               icon="USER"/>
         <item id="library$Publisher.lookup"
               icon="icons/user-group-ok.png"/>
+        <item screen="library$Files.browse"/>
     </menu>
 </menu-config>

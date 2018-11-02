@@ -36,6 +36,12 @@ public class Book extends StandardEntity {
     @Column(name = "NAME", nullable = false, length = 100)
     private String name;
 
+    @JoinTable(name = "LIBRARY_BOOK_FILES_LINK",
+        joinColumns = @JoinColumn(name = "BOOK_ID"),
+        inverseJoinColumns = @JoinColumn(name = "FILES_ID"))
+    @ManyToMany
+    protected List<Files> files;
+
     @JoinTable(name = "LIBRARY_BOOK_CATEGORIES_LINK",
         joinColumns = @JoinColumn(name = "BOOK_ID"),
         inverseJoinColumns = @JoinColumn(name = "CATEGORIES_ID"))
@@ -53,6 +59,15 @@ public class Book extends StandardEntity {
             inverseJoinColumns = @JoinColumn(name = "AUTHOR_ID"))
     @ManyToMany
     private Set<Author> authors;
+
+    public void setFiles(List<Files> files) {
+        this.files = files;
+    }
+
+    public List<Files> getFiles() {
+        return files;
+    }
+
 
     public void setCategories(List<Categories> categories) {
         this.categories = categories;

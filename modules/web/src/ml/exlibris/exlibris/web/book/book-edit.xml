@@ -13,6 +13,8 @@
                                   property="authors"/>
             <collectionDatasource id="categoriesDs"
                                   property="categories"/>
+            <collectionDatasource id="filesDs"
+                                  property="files"/>
         </datasource>
     </dsContext>
     <dialogMode height="600"
@@ -26,6 +28,25 @@
                 <field property="literatureType"/>
             </column>
         </fieldGroup>
+        <groupBox id="filesBox"
+                  caption="msg://ml.exlibris.exlibris.entity/Book.files">
+            <table id="filesTable"
+                   height="200px"
+                   width="100%">
+                <actions>
+                    <action id="add"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="description"/>
+                </columns>
+                <rows datasource="filesDs"/>
+                <buttonsPanel>
+                    <button action="filesTable.add"/>
+                    <button action="filesTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
         <split height="316px"
                orientation="horizontal"
                width="100%">

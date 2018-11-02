@@ -27,5 +27,6 @@
         <class>ml.exlibris.exlibris.entity.Publisher</class>
         <class>ml.exlibris.exlibris.entity.Town</class>
         <class>ml.exlibris.exlibris.entity.Categories</class>
+        <class>ml.exlibris.exlibris.entity.Files</class>
     </persistence-unit>
 </persistence>
