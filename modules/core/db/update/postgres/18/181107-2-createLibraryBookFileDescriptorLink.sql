@@ -1,0 +1,2 @@
+alter table LIBRARY_BOOK_FILE_DESCRIPTOR_LINK add constraint FK_BOOFILDES_ON_BOOK foreign key (BOOK_ID) references LIBRARY_BOOK(ID);
+alter table LIBRARY_BOOK_FILE_DESCRIPTOR_LINK add constraint FK_BOOFILDES_ON_FILE_DESCRIPTOR foreign key (FILE_DESCRIPTOR_ID) references SYS_FILE(ID);

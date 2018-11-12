@@ -16,16 +16,14 @@
 
 package ml.exlibris.exlibris.entity;
 
-import javax.persistence.*;
-
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.FileDescriptor;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
-import java.util.Set;
-import com.haulmont.cuba.core.entity.annotation.OnDelete;
-import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
-import com.haulmont.cuba.core.global.DeletePolicy;
+import javax.persistence.*;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @NamePattern("%s|name")
 @Table(name = "LIBRARY_BOOK")
@@ -52,22 +50,35 @@ public class Book extends StandardEntity {
     @ManyToMany
     private Set<Author> authors;
 
+    @JoinTable(name = "LIBRARY_BOOK_FILE_DESCRIPTOR_LINK",
+            joinColumns = @JoinColumn(name = "BOOK_ID"),
+            inverseJoinColumns = @JoinColumn(name = "FILE_DESCRIPTOR_ID"))
+    @ManyToMany
+    protected List<FileDescriptor> images;
+
+    public void setImages(List<FileDescriptor> images) {
+        this.images = images;
+    }
+
+    public List<FileDescriptor> getImages() {
+        return images == null ? Collections.emptyList() : images;
+    }
+
+
     public void setFiles(List<Files> files) {
         this.files = files;
     }
 
     public List<Files> getFiles() {
-        return files;
+        return files == null ? Collections.emptyList() : files;
     }
-
-
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
 
     public Set<Author> getAuthors() {
-        return authors;
+        return authors == null ? Collections.emptySet() : authors;
     }
 
     public void setName(String name) {

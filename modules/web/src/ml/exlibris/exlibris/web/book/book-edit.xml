@@ -11,8 +11,6 @@
                     view="book.edit">
             <collectionDatasource id="authorsDs"
                                   property="authors"/>
-            <collectionDatasource id="categoriesDs"
-                                  property="categories"/>
             <collectionDatasource id="filesDs"
                                   property="files"/>
         </datasource>
@@ -28,32 +26,13 @@
                 <field property="literatureType"/>
             </column>
         </fieldGroup>
-        <groupBox id="filesBox"
-                  caption="msg://ml.exlibris.exlibris.entity/Book.files">
-            <table id="filesTable"
-                   height="200px"
-                   width="100%">
-                <actions>
-                    <action id="add"/>
-                    <action id="remove"/>
-                </actions>
-                <columns>
-                    <column id="description"/>
-                </columns>
-                <rows datasource="filesDs"/>
-                <buttonsPanel>
-                    <button action="filesTable.add"/>
-                    <button action="filesTable.remove"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
-        <split height="316px"
+        <split height="300px"
                orientation="horizontal"
                width="100%">
-            <groupBox id="categoriesBox"
-                      caption="msg://Categories"
+            <groupBox id="filesBox"
+                      caption="msg://ml.exlibris.exlibris.entity/Book.files"
                       height="100%">
-                <table id="categoriesTable"
+                <table id="filesTable"
                        height="100%"
                        width="100%">
                     <actions>
@@ -61,12 +40,12 @@
                         <action id="remove"/>
                     </actions>
                     <columns>
-                        <column id="name"/>
+                        <column id="description"/>
                     </columns>
-                    <rows datasource="categoriesDs"/>
+                    <rows datasource="filesDs"/>
                     <buttonsPanel>
-                        <button action="categoriesTable.add"/>
-                        <button action="categoriesTable.remove"/>
+                        <button action="filesTable.add"/>
+                        <button action="filesTable.remove"/>
                     </buttonsPanel>
                 </table>
             </groupBox>
@@ -93,7 +72,21 @@
                 </table>
             </groupBox>
         </split>
+        <split height="200px"
+               orientation="horizontal"
+               pos="8"
+               width="100%">
+            <multiUpload id="multiUpload"/>
+            <scrollBox id="scrollBox"
+                       height="100%">
+                <flowBox id="thumbnailsBox"
+                         height="200px"
+                         spacing="true"
+                         width="100%"/>
+            </scrollBox>
+        </split>
         <frame id="windowActions"
+               height="37px"
                screen="editWindowActions"/>
     </layout>
 </window>
