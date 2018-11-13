@@ -114,7 +114,7 @@ public class BookEdit extends AbstractEditor<Book> {
         innerButtonBox.add(clearButton);
 
         Button showButton = componentsFactory.createComponent(Button.class);
-        showButton.setCaption("Show");
+        showButton.setCaption(getMessage("show"));
         showButton.setAction(new BaseAction("show") {
             @Override
             public void actionPerform(Component component) {
