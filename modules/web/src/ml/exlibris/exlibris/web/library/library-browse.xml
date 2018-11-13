@@ -6,24 +6,24 @@
   -->
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
         caption="msg://caption"
-        class="ml.exlibris.exlibris.web.categories.CategoriesBrowse"
+        class="ml.exlibris.exlibris.web.library.LibraryBrowse"
         focusComponent="table"
-        messagesPack="ml.exlibris.exlibris.web.categories">
+        lookupComponent="table"
+        messagesPack="ml.exlibris.exlibris.web.library">
     <dsContext>
-        <datasource id="categoriesDs"
-                    class="ml.exlibris.exlibris.entity.Categories"
-                    view="categories-full">
-            <collectionDatasource id="relatedDs"
-                                  property="related"/>
+        <datasource id="libraryDs"
+                    class="ml.exlibris.exlibris.entity.Library"
+                    view="library-view">
+            <collectionDatasource id="categoriesDs"
+                                  property="categories"/>
         </datasource>
-        <hierarchicalDatasource id="categoriesesDs"
-                                class="ml.exlibris.exlibris.entity.Categories"
-                                hierarchyProperty="related"
-                                view="categories-full">
+        <collectionDatasource id="librariesDs"
+                              class="ml.exlibris.exlibris.entity.Library"
+                              view="_local">
             <query>
-                <![CDATA[select e from library$Categories e]]>
+                <![CDATA[select e from library$Library e]]>
             </query>
-        </hierarchicalDatasource>
+        </collectionDatasource>
     </dsContext>
     <actions>
         <action id="save"
@@ -37,8 +37,8 @@
                 icon="icons/cancel.png"
                 invoke="cancel"/>
     </actions>
-    <dialogMode height="800"
-                width="1024"/>
+    <dialogMode height="600"
+                width="800"/>
     <layout>
         <split id="split"
                height="100%"
@@ -52,11 +52,11 @@
                   spacing="true">
                 <filter id="filter"
                         applyTo="table"
-                        datasource="categoriesesDs">
+                        datasource="librariesDs">
                     <properties include=".*"/>
                 </filter>
-                <treeTable id="table"
-                           width="100%">
+                <table id="table"
+                       width="100%">
                     <actions>
                         <action id="create"/>
                         <action id="edit"/>
@@ -65,7 +65,7 @@
                     <columns>
                         <column id="name"/>
                     </columns>
-                    <rows datasource="categoriesesDs"/>
+                    <rows datasource="librariesDs"/>
                     <rowsCount/>
                     <buttonsPanel id="buttonsPanel"
                                   alwaysVisible="true">
@@ -76,38 +76,37 @@
                         <button id="removeBtn"
                                 action="table.remove"/>
                     </buttonsPanel>
-                </treeTable>
+                </table>
             </vbox>
             <vbox id="editBox"
-                  expand="relatedGrp"
+                  expand="categoriesTable"
                   height="100%"
                   margin="false,false,false,true"
                   spacing="true">
-                <fieldGroup id="fieldGroup"
-                            datasource="categoriesDs">
-                    <column width="250px">
-                        <field property="name"/>
-                    </column>
-                </fieldGroup>
-                <groupBox id="relatedGrp"
-                          spacing="true">
-                    <table id="relatedTable"
-                           height="400px"
-                           width="100%">
-                        <actions>
-                            <action id="add"/>
-                            <action id="remove"/>
-                        </actions>
-                        <columns>
-                            <column id="name"/>
-                        </columns>
-                        <rows datasource="relatedDs"/>
-                        <buttonsPanel>
-                            <button action="relatedTable.add"/>
-                            <button action="relatedTable.remove"/>
-                        </buttonsPanel>
-                    </table>
-                </groupBox>
+                <scrollBox id="fieldGroupBox">
+                    <fieldGroup id="fieldGroup"
+                                datasource="libraryDs">
+                        <column width="350px">
+                            <field property="name"/>
+                        </column>
+                    </fieldGroup>
+                </scrollBox>
+                <table id="categoriesTable"
+                       caption="msg://categories"
+                       width="100%">
+                    <actions>
+                        <action id="add"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                    </columns>
+                    <rows datasource="categoriesDs"/>
+                    <buttonsPanel>
+                        <button action="categoriesTable.add"/>
+                        <button action="categoriesTable.remove"/>
+                    </buttonsPanel>
+                </table>
                 <hbox id="actionsPane"
                       spacing="true"
                       visible="false">

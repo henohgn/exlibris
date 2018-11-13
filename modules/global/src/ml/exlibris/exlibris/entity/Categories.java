@@ -33,6 +33,23 @@ public class Categories extends StandardEntity {
     protected List<Categories> related;
 
 
+
+
+    @JoinTable(name = "LIBRARY_LIBRARY_CATEGORIES_LINK",
+        joinColumns = @JoinColumn(name = "CATEGORIES_ID"),
+        inverseJoinColumns = @JoinColumn(name = "LIBRARY_ID"))
+    @ManyToMany
+    protected List<Library> libraries;
+
+    public void setLibraries(List<Library> libraries) {
+        this.libraries = libraries;
+    }
+
+    public List<Library> getLibraries() {
+        return libraries;
+    }
+
+
     public void setRelated(List<Categories> related) {
         this.related = related;
     }

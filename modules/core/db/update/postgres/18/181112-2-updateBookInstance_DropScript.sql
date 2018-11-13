@@ -1,0 +1,1 @@
+alter table LIBRARY_BOOK_INSTANCE drop column LIBRARY_DEPARTMENT_ID__U18827 cascade ;

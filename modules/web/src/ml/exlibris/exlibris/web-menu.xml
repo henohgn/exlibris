@@ -25,8 +25,9 @@
     </menu>
     <menu id="referenceData"
           insertBefore="administration">
-        <item id="library$LibraryDepartment.lookup"
-              icon="BANK"/>
+        <item id="library-lookup"
+              icon="BANK"
+              screen="library$Library.browse"/>
         <item icon="icons/category.png"
               screen="library$Categories.browse"/>
         <item id="library$LiteratureType.lookup"

@@ -18,7 +18,7 @@ package ml.exlibris.exlibris.service;
 
 import ml.exlibris.exlibris.entity.BookInstance;
 import ml.exlibris.exlibris.entity.BookPublication;
-import ml.exlibris.exlibris.entity.LibraryDepartment;
+import ml.exlibris.exlibris.entity.Library;
 import com.haulmont.cuba.core.global.View;
 
 import java.util.Collection;
@@ -35,5 +35,5 @@ public interface BookInstanceService {
     /**
      * Set department attribute in book instances and return updated entities.
      */
-    Collection<BookInstance> assignLibraryDepartment(Collection<BookInstance> bookInstances, LibraryDepartment libraryDepartment, View bookInstanceView);
+    Collection<BookInstance> assignLibrary(Collection<BookInstance> bookInstances, Library libraryDepartment, View bookInstanceView);
 }

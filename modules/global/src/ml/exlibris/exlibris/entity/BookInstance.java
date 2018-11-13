@@ -39,7 +39,16 @@ public class BookInstance extends StandardEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LIBRARY_DEPARTMENT_ID")
-    private LibraryDepartment libraryDepartment;
+    private Library libraryDepartment;
+
+    public Library getLibraryDepartment() {
+        return libraryDepartment;
+    }
+
+    public void setLibraryDepartment(Library libraryDepartment) {
+        this.libraryDepartment = libraryDepartment;
+    }
+
 
     public void setIsReference(Boolean isReference) {
         this.isReference = isReference;
@@ -63,14 +72,6 @@ public class BookInstance extends StandardEntity {
 
     public BookPublication getBookPublication() {
         return bookPublication;
-    }
-
-    public void setLibraryDepartment(LibraryDepartment libraryDepartment) {
-        this.libraryDepartment = libraryDepartment;
-    }
-
-    public LibraryDepartment getLibraryDepartment() {
-        return libraryDepartment;
     }
 
 }

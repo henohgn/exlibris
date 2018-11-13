@@ -1,0 +1,1 @@
+drop table if exists LIBRARY_LIBRARY_DEPARTMENT_CATEGORIES_LINK__U59467 cascade ;

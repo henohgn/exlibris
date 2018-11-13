@@ -17,9 +17,9 @@
 package ml.exlibris.exlibris.web.components;
 
 import ml.exlibris.exlibris.entity.BookInstance;
-import ml.exlibris.exlibris.web.department_assigning.DepartmentAssigning;
 import com.haulmont.cuba.gui.WindowManager;
 import com.haulmont.cuba.gui.components.*;
+import ml.exlibris.exlibris.web.department_assigning.LibraryAssigning;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,11 +30,11 @@ import java.util.Set;
  * <p>
  * This action is used by BookInstanceBrowse and AccessionRegisterWindow.
  */
-public class AssignLibraryDepartmentAction extends AbstractAction {
+public class AssignLibraryAction extends AbstractAction {
 
     private Table<BookInstance> booksInstancesTable;
 
-    public AssignLibraryDepartmentAction(Table<BookInstance> booksInstancesTable) {
+    public AssignLibraryAction(Table<BookInstance> booksInstancesTable) {
         super("assignLibraryDepartment");
         this.booksInstancesTable = booksInstancesTable;
     }
@@ -48,13 +48,13 @@ public class AssignLibraryDepartmentAction extends AbstractAction {
         if (!bookInstances.isEmpty()) {
             // Parameters passed to DepartmentAssigning window
             Map<String, Object> params = new HashMap<>();
-            params.put(DepartmentAssigning.INSTANCES_PARAM, bookInstances);
-            params.put(DepartmentAssigning.VIEW_PARAM, booksInstancesTable.getDatasource().getView());
+            params.put(LibraryAssigning.INSTANCES_PARAM, bookInstances);
+            params.put(LibraryAssigning.VIEW_PARAM, booksInstancesTable.getDatasource().getView());
 
-            final DepartmentAssigning departmentAssigningWindow = (DepartmentAssigning) frame.openWindow("department-assigning",
+            final LibraryAssigning departmentAssigningWindow = (LibraryAssigning) frame.openWindow("department-assigning",
                     WindowManager.OpenType.DIALOG.width((float)400), params);
             departmentAssigningWindow.addListener(actionId -> {
-                if (DepartmentAssigning.SUCCESS_ACTION.equals(actionId)) {
+                if (LibraryAssigning.SUCCESS_ACTION.equals(actionId)) {
                     for (BookInstance assignedInstance : departmentAssigningWindow.getAssignedInstances()) {
                         // Put returned instances back into datasource
                         booksInstancesTable.getDatasource().updateItem(assignedInstance);

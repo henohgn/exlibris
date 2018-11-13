@@ -22,7 +22,7 @@ import com.haulmont.cuba.gui.components.Label;
 import com.haulmont.cuba.gui.components.Table;
 import ml.exlibris.exlibris.entity.BookInstance;
 import ml.exlibris.exlibris.entity.BookPublication;
-import ml.exlibris.exlibris.web.components.AssignLibraryDepartmentAction;
+import ml.exlibris.exlibris.web.components.AssignLibraryAction;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -40,7 +40,7 @@ public class BookInstanceBrowse extends AbstractLookup {
 
     @Override
     public void init(Map<String, Object> params) {
-        addAction(new AssignLibraryDepartmentAction(bookInstanceTable));
+        addAction(new AssignLibraryAction(bookInstanceTable));
 
         bookTitleLabel.setValue(String.format(getMessage("book"),
                 publication.getBook().getName(), publication.getPublisher().getName(), publication.getYear()));

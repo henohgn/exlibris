@@ -22,7 +22,7 @@
         <class>ml.exlibris.exlibris.entity.Book</class>
         <class>ml.exlibris.exlibris.entity.BookInstance</class>
         <class>ml.exlibris.exlibris.entity.BookPublication</class>
-        <class>ml.exlibris.exlibris.entity.LibraryDepartment</class>
+        <class>ml.exlibris.exlibris.entity.Library</class>
         <class>ml.exlibris.exlibris.entity.LiteratureType</class>
         <class>ml.exlibris.exlibris.entity.Publisher</class>
         <class>ml.exlibris.exlibris.entity.Town</class>
