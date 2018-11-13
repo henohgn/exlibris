@@ -21,8 +21,10 @@
             spacing="true">
         <fieldGroup id="fieldGroup"
                     datasource="bookDs">
-            <column width="250px">
+            <column width="600px">
                 <field property="name"/>
+            </column>
+            <column>
                 <field property="literatureType"/>
             </column>
         </fieldGroup>

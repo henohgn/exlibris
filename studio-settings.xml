@@ -8,4 +8,9 @@
         <functionality id="newFkConstraintNaming"
                        state="ENABLE"/>
     </functionalitySettings>
+    <screenDesigner>
+        <screen module="web"
+                previewMode="true"
+                reference="ml/exlibris/exlibris/web/book/book-edit.xml"/>
+    </screenDesigner>
 </studio>
