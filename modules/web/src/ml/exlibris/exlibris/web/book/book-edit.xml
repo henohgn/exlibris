@@ -72,19 +72,23 @@
                 </table>
             </groupBox>
         </split>
-        <split height="200px"
-               orientation="horizontal"
-               pos="8"
-               width="100%">
-            <multiUpload id="multiUpload"/>
-            <scrollBox id="scrollBox"
-                       height="100%">
-                <flowBox id="thumbnailsBox"
-                         height="200px"
-                         spacing="true"
-                         width="100%"/>
-            </scrollBox>
-        </split>
+        <groupBox caption="msg://Images"
+                  spacing="true">
+            <split height="250px"
+                   orientation="horizontal"
+                   pos="5"
+                   width="100%">
+                <multiUpload id="multiUpload"
+                             caption="msg://Upload"/>
+                <scrollBox id="scrollBox"
+                           height="100%">
+                    <flowBox id="thumbnailsBox"
+                             height="250px"
+                             spacing="true"
+                             width="100%"/>
+                </scrollBox>
+            </split>
+        </groupBox>
         <frame id="windowActions"
                height="37px"
                screen="editWindowActions"/>

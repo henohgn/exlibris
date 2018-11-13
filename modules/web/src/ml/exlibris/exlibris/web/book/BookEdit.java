@@ -1,16 +1,21 @@
 package ml.exlibris.exlibris.web.book;
 
 import com.haulmont.cuba.core.entity.FileDescriptor;
+import com.haulmont.cuba.core.global.AppBeans;
+import com.haulmont.cuba.core.global.EntityStates;
 import com.haulmont.cuba.core.global.FileLoader;
 import com.haulmont.cuba.core.global.FileStorageException;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.actions.BaseAction;
 import com.haulmont.cuba.gui.data.DataSupplier;
+import com.haulmont.cuba.gui.export.ExportDisplay;
 import com.haulmont.cuba.gui.upload.FileUploadingAPI;
 import com.haulmont.cuba.gui.xml.layout.ComponentsFactory;
 import ml.exlibris.exlibris.entity.Book;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -29,9 +34,12 @@ public class BookEdit extends AbstractEditor<Book> {
     private FlowBoxLayout thumbnailsBox;
     @Inject
     private FileLoader fileLoader;
+    @Inject
+    private EntityStates entityStates;
 
     private Book book;
     private boolean isModified;
+    private List<FileDescriptor> imagesToDelete = new ArrayList<>();
 
     @Override
     public void init(Map<String, Object> params) {
@@ -43,11 +51,14 @@ public class BookEdit extends AbstractEditor<Book> {
                 String fileName = entry.getValue();
                 FileDescriptor fd = fileUploadingAPI.getFileDescriptor(fileId, fileName);
                 // save file to FileStorage
+                if (entityStates.isNew(book)) {
+                    saveNewEntity();
+                }
                 try {
                     fileUploadingAPI.putFileIntoStorage(fileId, fd);
-                } catch (FileStorageException e) {
-                    new RuntimeException("Error saving file to FileStorage", e);
+                } catch (FileStorageException ignore) {
                 }
+
                 // save file descriptor to database
                 FileDescriptor committedFd = dataSupplier.commit(fd);
 
@@ -80,35 +91,57 @@ public class BookEdit extends AbstractEditor<Book> {
     private void addThumbnail(FileDescriptor fd) {
         Image image = componentsFactory.createComponent(Image.class);
         image.setSource(FileDescriptorResource.class).setFileDescriptor(fd);
-        image.setWidth("100px");
+        image.setWidth("200px");
         image.setScaleMode(Image.ScaleMode.SCALE_DOWN);
-        image.setHeight("100px");
+        image.setHeight("200px");
 
-        HBoxLayout boxLayout = componentsFactory.createComponent(HBoxLayout.class);
-        boxLayout.add(image);
+        HBoxLayout imageBox = componentsFactory.createComponent(HBoxLayout.class);
+        imageBox.add(image);
+        VBoxLayout innerButtonBox = componentsFactory.createComponent(VBoxLayout.class);
+        imageBox.add(innerButtonBox);
 
-        Button button = componentsFactory.createComponent(Button.class);
-        button.setCaption("X");
-        button.setAction(new BaseAction("Remove") {
+        Button clearButton = componentsFactory.createComponent(Button.class);
+        clearButton.setCaption("X");
+        clearButton.setAction(new BaseAction("Remove") {
             @Override
             public void actionPerform(Component component) {
-                try {
-                    fileLoader.removeFile(fd);
-                    book.getImages().remove(fd);
-                    isModified = true;
-                } catch (FileStorageException ignore) {
-                }
-                thumbnailsBox.remove(boxLayout);
+                book.getImages().remove(fd);
+                imagesToDelete.add(fd);
+                isModified = true;
+                thumbnailsBox.remove(imageBox);
             }
         });
-        boxLayout.add(button);
+        innerButtonBox.add(clearButton);
 
-        thumbnailsBox.add(boxLayout);
+        Button showButton = componentsFactory.createComponent(Button.class);
+        showButton.setCaption("Show");
+        showButton.setAction(new BaseAction("show") {
+            @Override
+            public void actionPerform(Component component) {
+                AppBeans.get(ExportDisplay.class).show(fd);
+            }
+        });
+        innerButtonBox.add(showButton);
+
+        thumbnailsBox.add(imageBox);
+    }
+
+    private void saveNewEntity() {
+        book = dataSupplier.commit(book);
+        getDsContext().refresh();
     }
 
     @Override
     public void commitAndClose() {
-        if (isModified) dataSupplier.commit(book);
+        if (isModified) {
+            imagesToDelete.forEach(img -> {
+                try {
+                    fileLoader.removeFile(img);
+                } catch (FileStorageException ignore) {
+                }
+            });
+            dataSupplier.commit(book);
+        }
         super.commitAndClose();
     }
 }
