@@ -20,7 +20,7 @@
         messagesPack="ml.exlibris.exlibris.web.department_assigning">
     <dsContext>
         <collectionDatasource id="libraryDepartmentsDs"
-                              class="ml.exlibris.exlibris.entity.LibraryDepartment"
+                              class="ml.exlibris.exlibris.entity.Library"
                               view="_minimal">
             <query>
                 <![CDATA[select ld from library$LibraryDepartment ld

@@ -20,7 +20,7 @@ import ml.exlibris.exlibris.entity.Book;
 import ml.exlibris.exlibris.entity.BookInstance;
 import ml.exlibris.exlibris.entity.BookPublication;
 import ml.exlibris.exlibris.service.BookInstanceService;
-import ml.exlibris.exlibris.web.components.AssignLibraryDepartmentAction;
+import ml.exlibris.exlibris.web.components.AssignLibraryAction;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.WindowManager;
 import com.haulmont.cuba.gui.components.AbstractWindow;
@@ -67,7 +67,7 @@ public class AccessionRegisterWindow extends AbstractWindow {
     public void init(Map<String, Object> params) {
         bookField.addValueChangeListener(e -> bookPublicationsDs.refresh());
 
-        addAction(new AssignLibraryDepartmentAction(bookInstancesTable));
+        addAction(new AssignLibraryAction(bookInstancesTable));
     }
 
     public void createBook() {

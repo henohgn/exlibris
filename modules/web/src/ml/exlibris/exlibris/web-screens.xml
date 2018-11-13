@@ -31,10 +31,6 @@
             template="ml/exlibris/exlibris/web/bookpublication/bookpublication-browse.xml"/>
     <screen id="library$BookPublication.edit"
             template="ml/exlibris/exlibris/web/bookpublication/bookpublication-edit.xml"/>
-    <screen id="library$LibraryDepartment.lookup"
-            template="ml/exlibris/exlibris/web/librarydepartment/librarydepartment-browse.xml"/>
-    <screen id="library$LibraryDepartment.edit"
-            template="ml/exlibris/exlibris/web/librarydepartment/librarydepartment-edit.xml"/>
     <screen id="library$LiteratureType.lookup"
             template="ml/exlibris/exlibris/web/literaturetype/literaturetype-browse.xml"/>
     <screen id="library$LiteratureType.edit"
@@ -59,4 +55,7 @@
             template="ml/exlibris/exlibris/web/categories/categories-browse.xml"/>
     <screen id="library$Files.browse"
             template="ml/exlibris/exlibris/web/files/files-browse.xml"/>
+    <screen id="library$Library.browse"
+            agent="DESKTOP"
+            template="ml/exlibris/exlibris/web/library/library-browse.xml"/>
 </screen-config>

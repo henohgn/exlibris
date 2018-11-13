@@ -21,13 +21,13 @@ import com.haulmont.cuba.gui.WindowParam;
 import com.haulmont.cuba.gui.components.AbstractWindow;
 import com.haulmont.cuba.gui.components.LookupField;
 import ml.exlibris.exlibris.entity.BookInstance;
-import ml.exlibris.exlibris.entity.LibraryDepartment;
+import ml.exlibris.exlibris.entity.Library;
 import ml.exlibris.exlibris.service.BookInstanceService;
 
 import javax.inject.Inject;
 import java.util.Collection;
 
-public class DepartmentAssigning extends AbstractWindow {
+public class LibraryAssigning extends AbstractWindow {
 
     public static final String INSTANCES_PARAM = "bookInstances";
     public static final String VIEW_PARAM = "bookInstanceView";
@@ -38,7 +38,7 @@ public class DepartmentAssigning extends AbstractWindow {
     private BookInstanceService bookInstanceService;
 
     @Inject
-    private LookupField libraryDepartmentField;
+    private LookupField libraryField;
 
     @WindowParam(name = INSTANCES_PARAM, required = true)
     private Collection<BookInstance> bookInstances;
@@ -49,9 +49,9 @@ public class DepartmentAssigning extends AbstractWindow {
     private Collection<BookInstance> assignedInstances;
 
     public void assign() {
-        LibraryDepartment libraryDepartment = libraryDepartmentField.getValue();
+        Library libraryDepartment = libraryField.getValue();
         if (libraryDepartment != null) {
-            assignedInstances = bookInstanceService.assignLibraryDepartment(
+            assignedInstances = bookInstanceService.assignLibrary(
                     bookInstances, libraryDepartment, bookInstanceView);
             close(SUCCESS_ACTION);
         } else {

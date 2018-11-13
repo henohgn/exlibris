@@ -108,4 +108,10 @@
                       view="_minimal"/>
         </property>
     </view>
+    <view class="ml.exlibris.exlibris.entity.Library"
+          extends="_local"
+          name="library-view">
+        <property name="categories"
+                  view="_local"/>
+    </view>
 </views>

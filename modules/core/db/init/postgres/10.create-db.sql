@@ -74,22 +74,7 @@ create table LIBRARY_BOOK_PUBLICATION (
     primary key (ID)
 )^
 -- end LIBRARY_BOOK_PUBLICATION
--- begin LIBRARY_LIBRARY_DEPARTMENT
-create table LIBRARY_LIBRARY_DEPARTMENT (
-    ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    --
-    NAME varchar(50) not null,
-    --
-    primary key (ID)
-)^
--- end LIBRARY_LIBRARY_DEPARTMENT
+
 -- begin LIBRARY_LITERATURE_TYPE
 create table LIBRARY_LITERATURE_TYPE (
     ID uuid,
@@ -208,3 +193,27 @@ create table LIBRARY_BOOK_PUBLICATION_FILE_DESCRIPTOR_LINK (
     primary key (BOOK_PUBLICATION_ID, FILE_DESCRIPTOR_ID)
 )^
 -- end LIBRARY_BOOK_PUBLICATION_FILE_DESCRIPTOR_LINK
+
+-- begin LIBRARY_LIBRARY
+create table LIBRARY_LIBRARY (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    NAME varchar(50) not null,
+    --
+    primary key (ID)
+)^
+-- end LIBRARY_LIBRARY
+-- begin LIBRARY_LIBRARY_CATEGORIES_LINK
+create table LIBRARY_LIBRARY_CATEGORIES_LINK (
+    CATEGORIES_ID uuid,
+    LIBRARY_ID uuid,
+    primary key (CATEGORIES_ID, LIBRARY_ID)
+)^
+-- end LIBRARY_LIBRARY_CATEGORIES_LINK

@@ -1,0 +1,1 @@
+alter table library_library_department_categories_link rename to LIBRARY_LIBRARY_DEPARTMENT_CATEGORIES_LINK__U59467 ;

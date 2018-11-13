@@ -1,0 +1,3 @@
+alter table library_library_department rename to LIBRARY_LIBRARY_DEPARTMENT__U60390 ;
+alter table library_book_instance drop constraint LIBRARY_BOOK_INSTANCE_LIBRARY_DEPARTMENT ;
+alter table library_library_department_categories_link drop constraint FK_LIBDEPCAT_ON_LIBRARY_DEPARTMENT ;

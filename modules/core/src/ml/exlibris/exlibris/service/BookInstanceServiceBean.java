@@ -18,7 +18,7 @@ package ml.exlibris.exlibris.service;
 
 import ml.exlibris.exlibris.entity.BookInstance;
 import ml.exlibris.exlibris.entity.BookPublication;
-import ml.exlibris.exlibris.entity.LibraryDepartment;
+import ml.exlibris.exlibris.entity.Library;
 import com.haulmont.cuba.core.EntityManager;
 import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Transaction;
@@ -71,7 +71,7 @@ public class BookInstanceServiceBean implements BookInstanceService {
     }
 
     @Override
-    public Collection<BookInstance> assignLibraryDepartment(Collection<BookInstance> bookInstances, LibraryDepartment libraryDepartment, View bookInstanceView) {
+    public Collection<BookInstance> assignLibrary(Collection<BookInstance> bookInstances, Library libraryDepartment, View bookInstanceView) {
         checkPermission(EntityOp.UPDATE);
         Collection<BookInstance> mergedInstances = new ArrayList<>();
         // Explicit transaction control
