@@ -16,12 +16,14 @@
 
 package ml.exlibris.exlibris.entity;
 
-import javax.persistence.*;
-
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.FileDescriptor;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
+
+import javax.persistence.*;
+import java.util.List;
 
 @NamePattern("%s|book")
 @Table(name = "LIBRARY_BOOK_PUBLICATION")
@@ -55,6 +57,21 @@ public class BookPublication extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TOWN_ID")
     private Town town;
+
+    @JoinTable(name = "LIBRARY_BOOK_PUBLICATION_FILE_DESCRIPTOR_LINK",
+            joinColumns = @JoinColumn(name = "BOOK_PUBLICATION_ID"),
+            inverseJoinColumns = @JoinColumn(name = "FILE_DESCRIPTOR_ID"))
+    @ManyToMany
+    protected List<FileDescriptor> images;
+
+    public void setImages(List<FileDescriptor> images) {
+        this.images = images;
+    }
+
+    public List<FileDescriptor> getImages() {
+        return images;
+    }
+
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;

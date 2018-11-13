@@ -68,6 +68,23 @@
             <field property="circulation"/>
             <field property="pages"/>
         </fieldGroup>
+        <groupBox caption="msg://Images"
+                  spacing="true">
+            <split height="250px"
+                   orientation="horizontal"
+                   pos="5"
+                   width="100%">
+                <multiUpload id="multiUpload"
+                             caption="msg://Upload"/>
+                <scrollBox id="scrollBox"
+                           height="100%">
+                    <flowBox id="thumbnailsBox"
+                             height="250px"
+                             spacing="true"
+                             width="100%"/>
+                </scrollBox>
+            </split>
+        </groupBox>
         <frame id="windowActions"
                screen="editWindowActions"/>
     </layout>

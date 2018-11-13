@@ -90,6 +90,8 @@
                   view="_minimal"/>
         <property name="town"
                   view="_minimal"/>
+        <property name="images"
+                  view="_minimal"/>
     </view>
     <view class="ml.exlibris.exlibris.entity.Categories"
           extends="_local"
